@@ -1,7 +1,7 @@
 (function () {
   const script = document.currentScript;
-  const numeroWhatsApp = script.getAttribute('data-whatsapp') || '5213312416499';
-  const zapierURL = script.getAttribute('data-zapier') || 'https://hooks.zapier.com/hooks/catch/3489134/2jnstlg/';
+  const numeroWhatsApp = script.getAttribute('data-whatsapp');
+  const zapierURL = script.getAttribute('data-zapier');
 
   // Inyectar estilos
   const style = document.createElement('style');
