@@ -9,7 +9,7 @@
 
 #whatsapp-float {
   position: fixed;
-  bottom: 90px;
+  bottom: 40px;
   right: 20px;
   background-color: transparent;
   width: 60px;
@@ -34,7 +34,7 @@
 
 #form-container {
   position: fixed;
-  bottom: 160px;
+  bottom: 110px;
   right: 20px;
   background: white;
   padding: 20px;
