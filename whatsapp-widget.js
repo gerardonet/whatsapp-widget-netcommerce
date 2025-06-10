@@ -192,7 +192,7 @@
       const servicio = document.getElementById('servicio')?.value.trim();
       const mensaje = document.getElementById('mensaje')?.value.trim();
       const boton = document.getElementById('submit-whatsapp');
-      const emailValido = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+      const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       const telefonoValido = /^[0-9]{10}$/.test(telefono);
       const todosValidos = nombre && emailValido && telefonoValido && servicio && mensaje;
       if (boton) boton.disabled = !todosValidos;
@@ -201,7 +201,7 @@
     window.validarEmail = function () {
       const email = document.getElementById('email');
       const error = document.getElementById('email-error');
-      const valido = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email?.value.trim());
+      const valido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email?.value.trim());
       if (email && error) {
         error.style.display = !valido && email.value.trim() ? 'block' : 'none';
         email.classList.toggle('error', !valido && email.value.trim());
