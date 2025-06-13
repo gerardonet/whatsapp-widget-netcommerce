@@ -171,7 +171,7 @@
 
 </div>`;
 
-  document.addEventListener('DOMContentLoaded', function () {
+  function iniciarWidget() {
     document.head.appendChild(style);
     document.body.appendChild(container);
 
@@ -282,5 +282,11 @@
     document.getElementById('whatsapp-float')?.addEventListener('click', function () {
       document.getElementById('form-container')?.classList.toggle('show');
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iniciarWidget);
+  } else {
+    iniciarWidget();
+  }
 })();
