@@ -279,6 +279,8 @@
       window.open(url, '_blank');
     };
 
-    document.getElementById('whatsapp-float')?.addEventListener('click', toggleFormulario);
+    document.getElementById('whatsapp-float')?.addEventListener('click', function () {
+      document.getElementById('form-container')?.classList.toggle('show');
+    });
   });
 })();
