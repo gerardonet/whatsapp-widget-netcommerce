@@ -1,12 +1,7 @@
 (function () {
-  const scripts = document.querySelectorAll('script[src*="whatsapp-widget.js"]');
-  const script = scripts[scripts.length - 1];
-
-  const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5213312416499';
-  const emailDestino = script?.getAttribute('data-email') || '';
-  const mostrarServicio = script?.getAttribute('data-mostrar-servicio') === 'true';
-  const etiquetaServicio = script?.getAttribute('data-etiqueta-servicio') || '¿Qué servicio te interesa?';
-  const opcionesServicio = JSON.parse(script?.getAttribute('data-opciones-servicio') || '[]');
+  const numeroWhatsApp = '5213312416499';
+  const emailDestino = 'contacto@tusitio.com';
+  const mostrarServicio = true; // Cambiar a false para ocultar el campo desplegable
 
   const style = document.createElement('style');
   style.textContent = `@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -180,125 +175,100 @@
 
 </div>`;
 
-  function iniciarWidget() {
-  document.head.appendChild(style);
-  document.body.appendChild(container);
 
-  if (!mostrarServicio) {
-    document.getElementById('servicio')?.closest('div')?.remove();
-  } else {
-    const select = document.getElementById('servicio');
-    if (select && Array.isArray(opcionesServicio)) {
-      select.innerHTML = `<option value="">- ${etiquetaServicio} -</option>`;
-      opcionesServicio.forEach(opt => {
-        const option = document.createElement('option');
-        option.value = opt;
-        option.textContent = opt;
-        select.appendChild(option);
-      });
+  document.addEventListener('DOMContentLoaded', function () {
+    document.head.appendChild(style);
+    document.body.appendChild(container);
+
+    if (!mostrarServicio) {
+      document.getElementById('servicio')?.closest('div')?.remove();
     }
-  }
 
-  window.toggleFormulario = function () {
-    const form = document.getElementById('form-container');
-    if (form) {
-      form.classList.toggle('show');
-    } else {
-      console.warn('No se encontró el formulario con id "form-container"');
-    }
-  };
-
-  window.verificarCampos = function () {
-    const nombre = document.getElementById('nombre')?.value.trim();
-    const email = document.getElementById('email')?.value.trim();
-    const telefono = document.getElementById('telefono')?.value.trim();
-    const servicio = document.getElementById('servicio')?.value.trim();
-    const mensaje = document.getElementById('mensaje')?.value.trim();
-    const boton = document.getElementById('submit-whatsapp');
-    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const telefonoValido = /^[0-9]{10}$/.test(telefono);
-    const todosValidos = nombre && emailValido && telefonoValido && (!mostrarServicio || servicio) && mensaje;
-    if (boton) boton.disabled = !todosValidos;
-  };
-
-  window.validarEmail = function () {
-    const email = document.getElementById('email');
-    const error = document.getElementById('email-error');
-    const valido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email?.value.trim());
-    if (email && error) {
-      error.style.display = !valido && email.value.trim() ? 'block' : 'none';
-      email.classList.toggle('error', !valido && email.value.trim());
-    }
-  };
-
-  window.validarTelefono = function () {
-    const tel = document.getElementById('telefono');
-    const error = document.getElementById('telefono-error');
-    const valido = /^[0-9]{10}$/.test(tel?.value.trim());
-    if (tel && error) {
-      error.style.display = !valido && tel.value.trim() ? 'block' : 'none';
-      tel.classList.toggle('error', !valido && tel.value.trim());
-    }
-  };
-
-  window.validarServicio = function () {
-    const select = document.getElementById('servicio');
-    const error = document.getElementById('servicio-error');
-    const valido = select?.value.trim() !== '';
-    if (select && error) {
-      error.style.display = !valido ? 'block' : 'none';
-      select.classList.toggle('error', !valido);
-    }
-  };
-
-  window.enviarAWhatsApp = function () {
-    const nombre = document.getElementById('nombre')?.value.trim();
-    const email = document.getElementById('email')?.value.trim();
-    const telefono = document.getElementById('telefono')?.value.trim();
-    const servicio = document.getElementById('servicio')?.value.trim();
-    const mensaje = document.getElementById('mensaje')?.value.trim();
-    const utmParams = new URLSearchParams(window.location.search);
-    const utm_source = utmParams.get('utm_source') || '';
-    const utm_medium = utmParams.get('utm_medium') || '';
-    const utm_campaign = utmParams.get('utm_campaign') || '';
-
-    const mensajeWhatsApp =
-      `Hola, me gustaría más información.%0A` +
-      `Me llamo: *${nombre}*%0A` +
-      `Mi correo es: *${email}*%0A` +
-      `Mi teléfono: *${telefono}*%0A` +
-      (mostrarServicio ? `Servicio de interés: *${servicio}*%0A` : '') +
-      `Mensaje: *${mensaje}*`;
-
-    const data = {
-      nombre,
-      email,
-      telefono,
-      servicio,
-      mensaje,
-      utm_source,
-      utm_medium,
-      utm_campaign,
-      emailDestino
+    window.toggleFormulario = function () {
+      document.getElementById('form-container')?.classList.toggle('show');
     };
 
-    fetch('/wp-json/wff/v1/enviar-correo/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }).catch((err) => console.warn('Error al enviar al endpoint de WordPress:', err));
+    window.verificarCampos = function () {
+      const nombre = document.getElementById('nombre')?.value.trim();
+      const email = document.getElementById('email')?.value.trim();
+      const telefono = document.getElementById('telefono')?.value.trim();
+      const servicio = document.getElementById('servicio')?.value.trim();
+      const mensaje = document.getElementById('mensaje')?.value.trim();
+      const boton = document.getElementById('submit-whatsapp');
+      const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const telefonoValido = /^[0-9]{10}$/.test(telefono);
+      const todosValidos = nombre && emailValido && telefonoValido && (!mostrarServicio || servicio) && mensaje;
+      if (boton) boton.disabled = !todosValidos;
+    };
 
-    document.getElementById('form-container')?.classList.remove('show');
-    const url = `https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`;
-    window.open(url, '_blank');
-  };
-}
+    window.validarEmail = function () {
+      const email = document.getElementById('email');
+      const error = document.getElementById('email-error');
+      const valido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email?.value.trim());
+      if (email && error) {
+        error.style.display = !valido && email.value.trim() ? 'block' : 'none';
+        email.classList.toggle('error', !valido && email.value.trim());
+      }
+    };
 
-// Ejecutar el widget solo cuando el DOM esté listo
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', iniciarWidget);
-} else {
-  iniciarWidget();
-}
+    window.validarTelefono = function () {
+      const tel = document.getElementById('telefono');
+      const error = document.getElementById('telefono-error');
+      const valido = /^[0-9]{10}$/.test(tel?.value.trim());
+      if (tel && error) {
+        error.style.display = !valido && tel.value.trim() ? 'block' : 'none';
+        tel.classList.toggle('error', !valido && tel.value.trim());
+      }
+    };
+
+    window.validarServicio = function () {
+      const select = document.getElementById('servicio');
+      const error = document.getElementById('servicio-error');
+      const valido = select?.value.trim() !== '';
+      if (select && error) {
+        error.style.display = !valido ? 'block' : 'none';
+        select.classList.toggle('error', !valido);
+      }
+    };
+
+    window.enviarAWhatsApp = function () {
+      const nombre = document.getElementById('nombre')?.value.trim();
+      const email = document.getElementById('email')?.value.trim();
+      const telefono = document.getElementById('telefono')?.value.trim();
+      const servicio = document.getElementById('servicio')?.value.trim();
+      const mensaje = document.getElementById('mensaje')?.value.trim();
+      const utmParams = new URLSearchParams(window.location.search);
+      const utm_source = utmParams.get('utm_source') || '';
+      const utm_medium = utmParams.get('utm_medium') || '';
+      const utm_campaign = utmParams.get('utm_campaign') || '';
+
+      const mensajeWhatsApp =
+        `Hola, me gustaría más información.%0A` +
+        `Me llamo: *${nombre}*%0A` +
+        `Mi correo es: *${email}*%0A` +
+        `Mi teléfono: *${telefono}*%0A` +
+        (mostrarServicio ? `Servicio de interés: *${servicio}*%0A` : '') +
+        `Mensaje: *${mensaje}*`;
+
+      fetch('/wp-json/wff/v1/enviar-correo/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre,
+          email,
+          telefono,
+          servicio,
+          mensaje,
+          utm_source,
+          utm_medium,
+          utm_campaign,
+          emailDestino
+        })
+      }).catch((err) => console.warn('Error al enviar a WordPress:', err));
+
+      document.getElementById('form-container')?.classList.remove('show');
+      const url = `https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`;
+      window.open(url, '_blank');
+    };
+  });
+})();
