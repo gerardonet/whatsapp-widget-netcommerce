@@ -278,5 +278,7 @@
       const url = `https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`;
       window.open(url, '_blank');
     };
+
+    document.getElementById('whatsapp-float')?.addEventListener('click', toggleFormulario);
   });
 })();
