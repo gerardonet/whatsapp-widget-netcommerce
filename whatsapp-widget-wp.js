@@ -200,7 +200,12 @@
   }
 
   window.toggleFormulario = function () {
-    document.getElementById('form-container')?.classList.toggle('show');
+    const form = document.getElementById('form-container');
+    if (form) {
+      form.classList.toggle('show');
+    } else {
+      console.warn('No se encontró el formulario con id "form-container"');
+    }
   };
 
   window.verificarCampos = function () {
@@ -265,7 +270,6 @@
       (mostrarServicio ? `Servicio de interés: *${servicio}*%0A` : '') +
       `Mensaje: *${mensaje}*`;
 
-    // Enviar datos al backend de WordPress
     const data = {
       nombre,
       email,
@@ -292,10 +296,9 @@
   };
 }
 
-// Ejecutar según el estado del DOM
+// Ejecutar el widget solo cuando el DOM esté listo
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', iniciarWidget);
 } else {
   iniciarWidget();
 }
-
