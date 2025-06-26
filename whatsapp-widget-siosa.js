@@ -156,12 +156,12 @@
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué servicio te interesa? -</option>
-    <option>Web Design</option>
-    <option>Web Development</option>
-    <option>Web Marketing</option>
-    <option>Web Hosting</option>
-    <option>E-Commerce</option>
-    <option>Branding</option>
+    <option>Seguro de transporte</option>
+    <option>Seguro de vida</option>
+    <option>Seguro de gastor médicos mayores</option>
+    <option>Seguro de casa habitación</option>
+    <option>Seguro de negocio</option>
+    <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona un servicio.</div>
 
