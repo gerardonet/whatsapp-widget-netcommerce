@@ -1,3 +1,4 @@
+// Al final quedó insertado directamente en la landing
 (function () {
   const scripts = document.querySelectorAll('script[src*="whatsapp-widget.js"]');
   const script = scripts[scripts.length - 1];
