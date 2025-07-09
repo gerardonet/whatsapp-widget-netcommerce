@@ -156,10 +156,12 @@
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué servicio te interesa? -</option>
-    <option>Web Design</option>
-    <option>Web Development</option>
-    <option>Web Marketing</option>
-    <option>Web Hosting</option>
+    <option>Diseño Web</option>
+    <option>Desarrollo Web</option>
+    <option>Google Ads</option>
+    <option>Redes Sociales</option>
+    <option>Contenidos</option>
+    <option>Servicios de internet</option>
     <option>E-Commerce</option>
     <option>Branding</option>
   </select>
