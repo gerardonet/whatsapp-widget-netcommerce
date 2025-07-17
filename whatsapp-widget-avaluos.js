@@ -263,6 +263,17 @@
       });
 
       console.log("Enviando datos a Zapier:", zapierURL);
+      console.log("Datos que se enviarán a Zapier:", {
+        nombre,
+        email,
+        telefono,
+        servicio,
+        mensaje,
+        utm_source,
+        utm_medium,
+        utm_campaign
+      });
+
 
       if (zapierURL) {
   fetch(zapierURL, {
