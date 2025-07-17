@@ -251,57 +251,31 @@
         `Servicio de interés: *${servicio}*%0A` +
         `Mensaje: *${mensaje}*`;
 
-      const data = new URLSearchParams({
-        nombre,
-        email,
-        telefono,
-        servicio,
-        mensaje,
-        utm_source,
-        utm_medium,
-        utm_campaign
-      });
-
-      console.log("Enviando datos a Zapier:", zapierURL);
-      console.log("Datos que se enviarán a Zapier:", {
-        nombre,
-        email,
-        telefono,
-        servicio,
-        mensaje,
-        utm_source,
-        utm_medium,
-        utm_campaign
-      });
-
-
       if (zapierURL) {
-  fetch(zapierURL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      nombre,
-      email,
-      telefono,
-      servicio,
-      mensaje,
-      utm_source,
-      utm_medium,
-      utm_campaign
-    })
-  }).catch((err) => console.warn('Zapier error:', err));
-}
-
-
+        const formData = new URLSearchParams({
+          nombre,
+          email,
+          telefono,
+          servicio,
+          mensaje,
+          utm_source,
+          utm_medium,
+          utm_campaign
+        });
+      
+        fetch(zapierURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: formData
+        }).catch((err) => console.warn('Zapier error:', err));
+      }
+      
       document.getElementById('form-container')?.classList.remove('show');
 
-      // Espera 500ms para asegurar que el fetch se ejecute antes de redirigir
-      setTimeout(() => {
-        const url = `https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`;
-        window.open(url, '_blank');
-      }, 500);
+      const url = `https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`;
+      window.open(url, '_blank');
     };
   });
 })();
