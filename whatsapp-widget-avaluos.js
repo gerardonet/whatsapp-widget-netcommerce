@@ -159,10 +159,10 @@
     <option>Avances de Obra</option>
     <option>Avalúos Bancarios</option>
     <option>Avalúos Catastrales y Herencias</option>
-    <option>Avaluós Comerciales y Seguros</option>
+    <option>Avalúos Comerciales y Seguros</option>
     <option>Avalúos de Daños</option>
     <option>Avalúos de Mejora</option>
-    <option>Avaluós Jurídicos</option>
+    <option>Avalúos Jurídicos</option>
     <option>Peritajes de Inversión</option>
     <option>Fe de Hechos</option>
     <option>Estudios de Costos</option>
