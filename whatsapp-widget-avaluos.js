@@ -262,6 +262,8 @@
         utm_campaign
       });
 
+      console.log("Enviando datos a Zapier:", zapierURL);
+
       if (zapierURL) {
   fetch(zapierURL, {
     method: 'POST',
@@ -284,8 +286,11 @@
 
       document.getElementById('form-container')?.classList.remove('show');
 
-      const url = `https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`;
-      window.open(url, '_blank');
+      // Espera 500ms para asegurar que el fetch se ejecute antes de redirigir
+      setTimeout(() => {
+        const url = `https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`;
+        window.open(url, '_blank');
+      }, 500);
     };
   });
 })();
