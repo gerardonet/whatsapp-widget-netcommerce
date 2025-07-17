@@ -1,7 +1,7 @@
 (function () {
   const scripts = document.querySelectorAll('script[src*="whatsapp-widget.js"]');
   const script = scripts[scripts.length - 1];
-  const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5213312416499';
+  const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '523339530770';
   const zapierURL = script?.getAttribute('data-zapier') || '';
 
   const style = document.createElement('style');
@@ -156,14 +156,17 @@
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué servicio te interesa? -</option>
-    <option>Diseño Web</option>
-    <option>Desarrollo Web</option>
-    <option>Google Ads</option>
-    <option>Redes Sociales</option>
-    <option>Contenidos</option>
-    <option>Servicios de internet</option>
-    <option>E-Commerce</option>
-    <option>Branding</option>
+    <option>Avances de Obra</option>
+    <option>Avalúos Bancarios</option>
+    <option>Avalúos Catastrales y Herencias</option>
+    <option>Avaluós Comerciales y Seguros</option>
+    <option>Avalúos de Daños</option>
+    <option>Avalúos de Mejora</option>
+    <option>Avaluós Jurídicos</option>
+    <option>Peritajes de Inversión</option>
+    <option>Fe de Hechos</option>
+    <option>Estudios de Costos</option>
+    <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona un servicio.</div>
 
