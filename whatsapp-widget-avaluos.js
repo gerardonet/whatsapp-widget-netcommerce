@@ -263,11 +263,24 @@
       });
 
       if (zapierURL) {
-        fetch(zapierURL, {
-          method: 'POST',
-          body: data
-        }).catch((err) => console.warn('Zapier error:', err));
-      }
+  fetch(zapierURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nombre,
+      email,
+      telefono,
+      servicio,
+      mensaje,
+      utm_source,
+      utm_medium,
+      utm_campaign
+    })
+  }).catch((err) => console.warn('Zapier error:', err));
+}
+
 
       document.getElementById('form-container')?.classList.remove('show');
 
