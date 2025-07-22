@@ -156,10 +156,9 @@
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué tipo de producto te interesa? -</option>
-    <option>Productos para baño</option>
-    <option>Recubrimientos y adhesivos</option>
-    <option>Calentadores, climas y calderas</option>
-    <option>Plomería</option>
+    <option>Tina para 1 y 2 personas</option>
+    <option>Tina Freestanding</option>
+    <option>Jacuzzi o Tina con Hidromasaje</option>
     <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona un servicio.</div>
