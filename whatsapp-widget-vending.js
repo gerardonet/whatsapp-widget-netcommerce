@@ -156,9 +156,12 @@
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué tipo de producto te interesa? -</option>
-    <option>Tina para 1 y 2 personas</option>
-    <option>Tina Freestanding</option>
-    <option>Jacuzzi o Tina con Hidromasaje</option>
+    <option>Agua Purificada</option>
+    <option>Hielo Gourmet</option>
+    <option>Productos de Limpieza</option>
+    <option>Croquetas para Mascotas</option>
+    <option>Granos y Semillas</option>
+    <option>Cuidado Automotriz</option>
     <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona un servicio.</div>
