@@ -155,13 +155,10 @@
   <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
-    <option value="">- ¿Qué tipo de producto te interesa? -</option>
-    <option>Agua Purificada</option>
-    <option>Hielo Gourmet</option>
-    <option>Productos de Limpieza</option>
-    <option>Croquetas para Mascotas</option>
-    <option>Granos y Semillas</option>
-    <option>Cuidado Automotriz</option>
+    <option value="">- ¿Qué modelo de negocio te interesa? -</option>
+    <option>Kiosko con venta las 24hrs</option>
+    <option>Centro de llenado</option>
+    <option>Kiosko y centro de llenado en uno</option>
     <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona un servicio.</div>
