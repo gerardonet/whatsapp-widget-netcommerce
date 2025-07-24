@@ -155,10 +155,13 @@
   <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
-    <option value="">- ¿Qué modelo de negocio te interesa? -</option>
-    <option>Kiosko con venta las 24hrs</option>
-    <option>Centro de llenado</option>
-    <option>Kiosko y centro de llenado en uno</option>
+    <option value="">- ¿Qué servicio te interesa? -</option>
+    <option>Limpieza de oficinas, hoteles y edificios</option>
+    <option>Mantenimiento preventivo y correctivo</option>
+    <option>Fumigación para tu empresa</option>
+    <option>Jardinería para interiores y exteriores</option>
+    <option>Recolección de desechos</option>
+    <option>Compra venta de productos de limpieza</option>
     <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona un servicio.</div>
@@ -241,7 +244,7 @@
         `Me llamo: *${nombre}*%0A` +
         `Mi correo es: *${email}*%0A` +
         `Mi teléfono: *${telefono}*%0A` +
-        `Producto de interés: *${servicio}*%0A` +
+        `Servicio de interés: *${servicio}*%0A` +
         `Mensaje: *${mensaje}*`;
 
       const data = new URLSearchParams({
