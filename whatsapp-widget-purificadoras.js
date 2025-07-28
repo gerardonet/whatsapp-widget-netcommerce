@@ -237,7 +237,7 @@
       const utm_medium = utmParams.get('utm_medium') || '';
       const utm_campaign = utmParams.get('utm_campaign') || '';
       const mensajeWhatsApp =
-        `Hola, me gustaría más información sobre las *plantas purificadoras*.%0A` +
+        `Hola, me gustaría más información de las *plantas purificadoras*.%0A` +
         `Me llamo: *${nombre}*%0A` +
         `Mi correo es: *${email}*%0A` +
         `Mi teléfono: *${telefono}*%0A` +
