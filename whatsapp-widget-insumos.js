@@ -162,7 +162,6 @@
     <option>Sanitizantes</option>
     <option>Equipos</option>
     <option>Libros</option>
-    <option>E-Commerce</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona un producto.</div>
 
