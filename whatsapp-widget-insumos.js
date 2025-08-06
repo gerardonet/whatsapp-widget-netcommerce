@@ -155,17 +155,16 @@
   <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
-    <option value="">- ¿Qué servicio te interesa? -</option>
-    <option>Diseño Web</option>
-    <option>Desarrollo Web</option>
-    <option>Google Ads</option>
-    <option>Redes Sociales</option>
-    <option>Contenidos</option>
-    <option>Servicios de internet</option>
+    <option value="">- ¿Qué tipo de producto te interesa? -</option>
+    <option>Ingredientes</option>
+    <option>Kits</option>
+    <option>Embotellados</option>
+    <option>Sanitizantes</option>
+    <option>Equipos</option>
+    <option>Libros</option>
     <option>E-Commerce</option>
-    <option>Branding</option>
   </select>
-  <div id="servicio-error" class="error-text">Por favor selecciona un servicio.</div>
+  <div id="servicio-error" class="error-text">Por favor selecciona un producto.</div>
 
   <textarea id="mensaje" rows="3" placeholder="Cuéntanos en qué podemos ayudarte" oninput="verificarCampos()"></textarea>
 
@@ -245,7 +244,7 @@
         `Me llamo: *${nombre}*%0A` +
         `Mi correo es: *${email}*%0A` +
         `Mi teléfono: *${telefono}*%0A` +
-        `Servicio de interés: *${servicio}*%0A` +
+        `Producto de interés: *${servicio}*%0A` +
         `Mensaje: *${mensaje}*`;
 
       const data = new URLSearchParams({
