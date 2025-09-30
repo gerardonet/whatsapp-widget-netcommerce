@@ -279,7 +279,7 @@
     const floatBtn  = document.getElementById('whatsapp-float');
 if (floatBtn) {
   floatBtn.addEventListener('click', function(){
-    window.dataLayer.push({ event: 'whatsapp_float_click' });
+    window.dataLayer.push({ event: 'pre_whatsapp_click' });
   });
 }
 
@@ -287,9 +287,7 @@ const submitBtn = document.getElementById('submit-whatsapp');
 if (submitBtn) {
   submitBtn.addEventListener('click', function(){
     if (!submitBtn.disabled) {
-      // Puedes enviar un dato NO-PII, por ejemplo el servicio elegido:
-      const servicio = document.getElementById('servicio')?.value || '';
-      window.dataLayer.push({ event: 'whatsapp_submit_click', servicio });
+      window.dataLayer.push({ event: 'post_whatsapp_click' });
     }
   });
 }
