@@ -242,6 +242,12 @@
       const telefono = document.getElementById('telefono')?.value.trim();
       const servicio = document.getElementById('servicio')?.value.trim();
       const mensaje = document.getElementById('mensaje')?.value.trim();
+
+      window.dataLayer.push({
+        event: 'whatsapp_submit_click',
+        nombre, email, telefono, servicio
+      });
+      
       const utmParams = new URLSearchParams(window.location.search);
       const utm_source = utmParams.get('utm_source') || '';
       const utm_medium = utmParams.get('utm_medium') || '';
