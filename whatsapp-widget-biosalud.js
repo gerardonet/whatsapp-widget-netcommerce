@@ -1,5 +1,4 @@
 (function () {
-  window.dataLayer = window.dataLayer || [];
   const scripts = document.querySelectorAll('script[src*="whatsapp-widget"]');
   const script = scripts[scripts.length - 1];
   const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5213313144826';
@@ -302,9 +301,11 @@
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: eventName,
-        elementText: (el.textContent || '').trim(),
-        elementId: el.id || '',
-        elementClasses: el.className || ''
+        element_text: (el.textContent || '').trim(),
+        element_id: el.id || '',
+        element_classes: (typeof el.className === 'string'
+          ? el.className
+          : (el.className && el.className.baseVal) || '')
       });
     });
   }
