@@ -1,4 +1,5 @@
 (function () {
+  window.dataLayer = window.dataLayer || [];
   const scripts = document.querySelectorAll('script[src*="whatsapp-widget"]');
   const script = scripts[scripts.length - 1];
   const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5213313144826';
@@ -185,6 +186,11 @@
     // Funciones globales
     window.toggleFormulario = function () {
       document.getElementById('form-container')?.classList.toggle('show');
+
+      window.dataLayer.push({
+        event: 'whatsapp_form_toggle',
+        form_visible: form?.classList.contains('show') ? 'true' : 'false'
+      });
     };
 
     window.verificarCampos = function () {
