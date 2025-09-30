@@ -162,7 +162,7 @@
     <option>Flores de Bach</option>
     <option>Homeopatía</option>
     <option>Cursos Presenciales</option>
-    <option>Cusros en Línea</option>
+    <option>Cursos en Línea</option>
     <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona un producto.</div>
