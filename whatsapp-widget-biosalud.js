@@ -1,5 +1,4 @@
 (function () {
-  window.dataLayer = window.dataLayer || [];
   const scripts = document.querySelectorAll('script[src*="whatsapp-widget"]');
   const script = scripts[scripts.length - 1];
   const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5213313144826';
@@ -186,11 +185,6 @@
     // Funciones globales
     window.toggleFormulario = function () {
       document.getElementById('form-container')?.classList.toggle('show');
-
-      window.dataLayer.push({
-        event: 'whatsapp_form_toggle',
-        form_visible: form?.classList.contains('show') ? 'true' : 'false'
-      });
     };
 
     window.verificarCampos = function () {
@@ -241,13 +235,7 @@
       const email = document.getElementById('email')?.value.trim();
       const telefono = document.getElementById('telefono')?.value.trim();
       const servicio = document.getElementById('servicio')?.value.trim();
-      const mensaje = document.getElementById('mensaje')?.value.trim();
-
-      window.dataLayer.push({
-        event: 'whatsapp_submit_click',
-        nombre, email, telefono, servicio
-      });
-      
+      const mensaje = document.getElementById('mensaje')?.value.trim();      
       const utmParams = new URLSearchParams(window.location.search);
       const utm_source = utmParams.get('utm_source') || '';
       const utm_medium = utmParams.get('utm_medium') || '';
