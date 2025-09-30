@@ -1,4 +1,5 @@
 (function () {
+  window.dataLayer = window.dataLayer || [];
   const scripts = document.querySelectorAll('script[src*="whatsapp-widget"]');
   const script = scripts[scripts.length - 1];
   const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5213313144826';
@@ -274,5 +275,24 @@
       const url = `https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`;
       window.open(url, '_blank');
     };
+
+    const floatBtn  = document.getElementById('whatsapp-float');
+if (floatBtn) {
+  floatBtn.addEventListener('click', function(){
+    window.dataLayer.push({ event: 'whatsapp_float_click' });
+  });
+}
+
+const submitBtn = document.getElementById('submit-whatsapp');
+if (submitBtn) {
+  submitBtn.addEventListener('click', function(){
+    if (!submitBtn.disabled) {
+      // Puedes enviar un dato NO-PII, por ejemplo el servicio elegido:
+      const servicio = document.getElementById('servicio')?.value || '';
+      window.dataLayer.push({ event: 'whatsapp_submit_click', servicio });
+    }
+  });
+}
+    
   });
 })();
