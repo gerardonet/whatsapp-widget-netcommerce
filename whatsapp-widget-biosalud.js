@@ -276,21 +276,40 @@
       window.open(url, '_blank');
     };
 
-    const floatBtn  = document.getElementById('whatsapp-float');
-if (floatBtn) {
-  floatBtn.addEventListener('click', function(){
-    window.dataLayer.push({ event: 'pre_whatsapp_click' });
-  });
-}
+     // ---- Delegación de clics para GTM ----
+  if (!window.__gtmDelegationBound) {
+    window.__gtmDelegationBound = true;
 
-const submitBtn = document.getElementById('submit-whatsapp');
-if (submitBtn) {
-  submitBtn.addEventListener('click', function(){
-    if (!submitBtn.disabled) {
-      window.dataLayer.push({ event: 'post_whatsapp_click' });
-    }
-  });
-}
+    document.addEventListener('click', function (event) {
+      // Busca el botón flotante o el botón de enviar, aunque el click caiga en el SVG
+      const el = event.target.closest('#whatsapp-float, #submit-whatsapp, .FormularioWhatsapp, .AbrirWhatsapp');
+      if (!el) return;
+
+      // No dispares si es el botón de enviar pero está deshabilitado
+      if ((el.id === 'submit-whatsapp' || el.classList.contains('AbrirWhatsapp')) && el.disabled) {
+        return;
+      }
+
+      // Deriva el nombre del evento según el elemento
+      let eventName = 'whatsapp_click';
+      if (el.id === 'submit-whatsapp' || el.classList.contains('AbrirWhatsapp')) {
+        eventName = 'whatsapp_submit_click';
+      } else if (el.id === 'whatsapp-float' || el.classList.contains('FormularioWhatsapp')) {
+        eventName = 'whatsapp_float_click';
+      }
+
+      // Asegura dataLayer y envía datos no-PII útiles
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: eventName,
+        elementText: (el.textContent || '').trim(),
+        elementId: el.id || '',
+        elementClasses: el.className || ''
+      });
+    });
+  }
+  // ---- Fin delegación GTM ----
+
     
   });
 })();
