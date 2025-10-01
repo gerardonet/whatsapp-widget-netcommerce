@@ -1,7 +1,7 @@
 (function () {
   const scripts = document.querySelectorAll('script[src*="whatsapp-widget"]');
   const script = scripts[scripts.length - 1];
-  const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5213322268134';
+  const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5213350890682';
   const zapierURL = script?.getAttribute('data-zapier') || '';
 
   const style = document.createElement('style');
