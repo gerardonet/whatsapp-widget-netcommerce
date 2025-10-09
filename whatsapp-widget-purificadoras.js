@@ -156,9 +156,9 @@
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué modelo de negocio te interesa? -</option>
-    <option>Kiosko con venta las 24hrs</option>
+    <option>Kiosko 24-7</option>
     <option>Centro de llenado</option>
-    <option>Kiosko y centro de llenado en uno</option>
+    <option>Modelo mixto</option>
     <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona un servicio.</div>
