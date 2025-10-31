@@ -155,20 +155,16 @@
   <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
-    <option value="">- ¿Qué servicio te interesa? -</option>
-    <option>Avances de Obra</option>
-    <option>Avalúos Bancarios</option>
-    <option>Avalúos Catastrales y Herencias</option>
-    <option>Avalúos Comerciales y Seguros</option>
-    <option>Avalúos de Daños</option>
-    <option>Avalúos de Mejora</option>
-    <option>Avalúos Jurídicos</option>
-    <option>Peritajes de Inversión</option>
-    <option>Fe de Hechos</option>
-    <option>Estudios de Costos</option>
+    <option value="">- ¿Qué tipo de producto te interesa? -</option>
+    <option>Eslingas planas</option>
+    <option>Eslingas redondas</option>
+    <option>Eslingas de acero</option>
+    <option>Accesorios</option>
+    <option>Cinchos</option>
+    <option>Equipos</option>
     <option>Otro</option>
   </select>
-  <div id="servicio-error" class="error-text">Por favor selecciona un servicio.</div>
+  <div id="servicio-error" class="error-text">Por favor selecciona una opción.</div>
 
   <textarea id="mensaje" rows="3" placeholder="Cuéntanos en qué podemos ayudarte" oninput="verificarCampos()"></textarea>
 
@@ -248,7 +244,7 @@
         `Me llamo: *${nombre}*%0A` +
         `Mi correo es: *${email}*%0A` +
         `Mi teléfono: *${telefono}*%0A` +
-        `Servicio de interés: *${servicio}*%0A` +
+        `Producto de interés: *${servicio}*%0A` +
         `Mensaje: *${mensaje}*`;
 
       if (zapierURL) {
