@@ -156,12 +156,27 @@
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué tipo de producto te interesa? -</option>
-    <option>Eslingas planas</option>
-    <option>Eslingas redondas</option>
-    <option>Eslingas de acero</option>
-    <option>Accesorios</option>
-    <option>Cinchos</option>
-    <option>Equipos</option>
+    <option>O'rings</option>
+    <option>Respaldos</option>
+    <option>Quadring</option>
+    <option>Cordones</option>
+    <option>Limpiadores</option>
+    <option>Sellos hidráulicos</option>
+    <option>Empaquetaduras tranzadas</option>
+    <option>Anillo de retención exterior</option>
+    <option>Anillo de retención interior</option>
+    <option>Anillo de retención tipo B</option>
+    <option>Anillo de retención tipo C</option>
+    <option>Vseal</option>
+    <option>Guías de desgaste</option>
+    <option>Retenes</option>
+    <option>Kit hidráulicos</option>
+    <option>Estuches de mantenimiento</option>
+    <option>Sellos mecánicos</option>
+    <option>Tubo y barra</option>
+    <option>Anillo de retención tipo PO</option>
+    <option>Anillo de retención externo reforzado</option>
+    <option>Anillo de retención tipo TX</option>
     <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona una opción.</div>
