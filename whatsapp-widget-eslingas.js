@@ -158,7 +158,8 @@
     <option value="">- ¿Qué tipo de producto te interesa? -</option>
     <option>Eslingas planas</option>
     <option>Eslingas redondas</option>
-    <option>Eslingas de acero</option>
+    <option>Eslingas de cadena</option>
+    <option>Cables de acero</option>
     <option>Accesorios</option>
     <option>Cinchos</option>
     <option>Equipos</option>
