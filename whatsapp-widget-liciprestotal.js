@@ -155,14 +155,13 @@
   <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
-    <option value="">- ¿Qué tipo de producto te interesa? -</option>
-    <option>Eslingas planas</option>
-    <option>Eslingas redondas</option>
-    <option>Eslingas de cadena</option>
-    <option>Cables de acero</option>
-    <option>Accesorios</option>
-    <option>Cinchos</option>
-    <option>Equipos</option>
+    <option value="">- ¿Qué servicio te interesa? -</option>
+    <option>Precios Unitarios</option>
+    <option>Neodata WIN+PLUS</option>
+    <option>Licitaciones</option>
+    <option>Consultoría</option>
+    <option>Presupuestos</option>
+    <option>Cuantificación precisa</option>
     <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona una opción.</div>
