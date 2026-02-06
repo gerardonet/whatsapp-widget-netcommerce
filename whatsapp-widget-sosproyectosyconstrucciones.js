@@ -1,7 +1,7 @@
 (function () {
   const scripts = document.querySelectorAll('script[src*="whatsapp-widget"]');
   const script = scripts[scripts.length - 1];
-  const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '523312864160';
+  const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '523317720243';
   const zapierURL = script?.getAttribute('data-zapier') || '';
 
   const style = document.createElement('style');
@@ -155,14 +155,12 @@
   <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
-    <option value="">- ¿Qué tipo de producto te interesa? -</option>
-    <option>Eslingas planas</option>
-    <option>Eslingas redondas</option>
-    <option>Eslingas de cadena</option>
-    <option>Cables de acero</option>
-    <option>Accesorios</option>
-    <option>Cinchos</option>
-    <option>Equipos</option>
+    <option value="">- ¿Qué tipo de servicio te interesa? -</option>
+    <option>Construcción</option>
+    <option>Mantenimiento</option>
+    <option>Diseño de interiores</option>
+    <option>Ampliaciones</option>
+    <option>Remodelación</option>
     <option>Otro</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona una opción.</div>
@@ -245,7 +243,7 @@
         `Me llamo: *${nombre}*%0A` +
         `Mi correo es: *${email}*%0A` +
         `Mi teléfono: *${telefono}*%0A` +
-        `Producto de interés: *${servicio}*%0A` +
+        `Servicio de interés: *${servicio}*%0A` +
         `Mensaje: *${mensaje}*`;
 
       if (zapierURL) {
