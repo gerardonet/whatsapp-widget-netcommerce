@@ -279,7 +279,7 @@
       if (grupo1.includes(estado)) {
         numeroWhatsApp = "5213333333333";
       } else {
-        numeroWhatsApp = "5212222222222";
+        numeroWhatsApp = "5218112486335";
       }
     
       estadoActual.textContent = estado;
