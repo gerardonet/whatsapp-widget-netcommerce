@@ -292,7 +292,8 @@
     function volverASeleccion() {
       estadoConfirmado.style.display = "none";
       volverCambiar.style.display = "none";
-      preguntaRegion.style.display = "block";
+      preguntaRegion.style.display = "none";
+      selectorManual.style.display = "block";
     }
 
     // Confirmar detección automática
