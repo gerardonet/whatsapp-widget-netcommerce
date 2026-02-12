@@ -169,20 +169,24 @@
 
   <div id="selector-manual" style="display:none; margin-top:8px;">
     <select id="estado-manual" style="width:100%; padding:6px; border-radius:4px;">
-      <option value="">Selecciona tu estado</option>
-      <optgroup label="Grupo Norte">
-        <option value="Coahuila">Coahuila</option>
-        <option value="Chihuahua">Chihuahua</option>
-        <option value="Sinaloa">Sinaloa</option>
-      </optgroup>
-      <optgroup label="Grupo Centro">
-        <option value="Tamaulipas">Tamaulipas</option>
-        <option value="San Luis Potosí">San Luis Potosí</option>
-        <option value="Querétaro">Querétaro</option>
-        <option value="Nuevo León">Nuevo León</option>
-        <option value="Guanajuato">Guanajuato</option>
-      </optgroup>
-    </select>
+  <option value="">Selecciona tu estado</option>
+
+  <optgroup label="Región 1">
+    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+    <option value="Chihuahua">Chihuahua</option>
+    <option value="Sinaloa">Sinaloa</option>
+  </optgroup>
+
+  <optgroup label="Región 2">
+    <option value="Aguascalientes">Aguascalientes</option>
+    <option value="Guanajuato">Guanajuato</option>
+    <option value="Nuevo León">Nuevo León</option>
+    <option value="Querétaro">Querétaro</option>
+    <option value="San Luis Potosí">San Luis Potosí</option>
+    <option value="Tamaulipas">Tamaulipas</option>
+    <option value="Otro">Otro</option>
+  </optgroup>
+</select>
 
     <button type="button" id="confirmar-manual" style="margin-top:6px; width:100%; background:#25D366; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;">
       Confirmar estado
@@ -216,18 +220,23 @@
     document.head.appendChild(style);
     document.body.appendChild(container);
 
-    // Siempre detectar estado automáticamente
-fetch("https://ipapi.co/json/")
+    fetch("https://ipapi.co/json/")
   .then(res => res.json())
   .then(data => {
 
-    const grupoNorte = ["Coahuila", "Chihuahua", "Sinaloa"];
+    const grupoNorte = [
+      "Coahuila de Zaragoza",
+      "Chihuahua",
+      "Sinaloa"
+    ];
+
     const grupoCentro = [
-      "Tamaulipas",
-      "San Luis Potosí",
-      "Querétaro",
+      "Aguascalientes",
+      "Guanajuato",
       "Nuevo León",
-      "Guanajuato"
+      "Querétaro",
+      "San Luis Potosí",
+      "Tamaulipas"
     ];
 
     const contenedor = document.getElementById("detector-region");
@@ -247,6 +256,10 @@ fetch("https://ipapi.co/json/")
       } 
       else if (grupoCentro.includes(estadoDetectado)) {
         numeroDetectado = "5212222222222";
+      } 
+      else {
+        // Si detecta otro estado de México
+        numeroDetectado = "5212222222222";
       }
     }
 
@@ -256,13 +269,13 @@ fetch("https://ipapi.co/json/")
 
     contenedor.style.display = "block";
 
-    // Si acepta detección
+    // Confirmar detección
     document.getElementById("confirmar-region").onclick = function () {
       numeroWhatsApp = numeroDetectado;
       contenedor.style.display = "none";
     };
 
-    // Si quiere cambiar
+    // Cambiar manualmente
     document.getElementById("cambiar-region").onclick = function () {
       document.getElementById("acciones-region").style.display = "none";
       selectorManual.style.display = "block";
@@ -279,7 +292,8 @@ fetch("https://ipapi.co/json/")
 
       if (grupoNorte.includes(estadoManual)) {
         numeroWhatsApp = "5213333333333";
-      } else if (grupoCentro.includes(estadoManual)) {
+      } else {
+        // Todo lo demás (incluye "Otro")
         numeroWhatsApp = "5212222222222";
       }
 
