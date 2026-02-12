@@ -1,7 +1,7 @@
 (function () {
   const scripts = document.querySelectorAll('script[src*="whatsapp-widget"]');
   const script = scripts[scripts.length - 1];
-  const numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5218112486335';
+  let numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5218112486335';
   const zapierURL = script?.getAttribute('data-zapier') || '';
 
   const style = document.createElement('style');
@@ -179,6 +179,36 @@
     document.head.appendChild(style);
     document.body.appendChild(container);
 
+    // Detectar estado automáticamente (México)
+fetch("https://ipapi.co/json/")
+  .then(res => res.json())
+  .then(data => {
+    if (data.country === "MX") {
+      const estado = data.region;
+
+      const grupoNorte = ["Coahuila", "Chihuahua", "Sinaloa"];
+      const grupoCentro = [
+        "Tamaulipas",
+        "San Luis Potosí",
+        "Querétaro",
+        "Nuevo León",
+        "Guanajuato"
+      ];
+
+      if (grupoNorte.includes(estado)) {
+        numeroWhatsApp = "5213333333333"; // 👉 Número grupo norte
+      } 
+      else if (grupoCentro.includes(estado)) {
+        numeroWhatsApp = "5212222222222"; // 👉 Número grupo centro
+      }
+
+      console.log("Estado detectado:", estado);
+      console.log("Número asignado:", numeroWhatsApp);
+    }
+  })
+  .catch(err => console.warn("Geolocalización no disponible:", err));
+
+
     // Funciones globales
     window.toggleFormulario = function () {
       document.getElementById('form-container')?.classList.toggle('show');
@@ -265,7 +295,8 @@
 
       document.getElementById('form-container')?.classList.remove('show');
 
-      const url = `https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`;
+      const numeroFinal = numeroWhatsApp || '5218112486335';
+      const url = `https://wa.me/${numeroFinal}?text=${mensajeWhatsApp}`;
       window.open(url, '_blank');
     };
   });
