@@ -155,8 +155,10 @@
   <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
 
   <div id="detector-region" style="display:none; background:#f4f4f4; padding:10px; border-radius:6px; margin-bottom:10px; font-size:13px; font-family:'Poppins', sans-serif;">
+  
   <div id="texto-region"></div>
-  <div style="margin-top:8px; display:flex; gap:6px;">
+
+  <div id="acciones-region" style="margin-top:8px; display:flex; gap:6px;">
     <button type="button" id="confirmar-region" style="flex:1; background:#25D366; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;">
       Sí
     </button>
@@ -164,7 +166,30 @@
       Cambiar
     </button>
   </div>
+
+  <div id="selector-manual" style="display:none; margin-top:8px;">
+    <select id="estado-manual" style="width:100%; padding:6px; border-radius:4px;">
+      <option value="">Selecciona tu estado</option>
+      <optgroup label="Grupo Norte">
+        <option value="Coahuila">Coahuila</option>
+        <option value="Chihuahua">Chihuahua</option>
+        <option value="Sinaloa">Sinaloa</option>
+      </optgroup>
+      <optgroup label="Grupo Centro">
+        <option value="Tamaulipas">Tamaulipas</option>
+        <option value="San Luis Potosí">San Luis Potosí</option>
+        <option value="Querétaro">Querétaro</option>
+        <option value="Nuevo León">Nuevo León</option>
+        <option value="Guanajuato">Guanajuato</option>
+      </optgroup>
+    </select>
+
+    <button type="button" id="confirmar-manual" style="margin-top:6px; width:100%; background:#25D366; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;">
+      Confirmar estado
+    </button>
   </div>
+
+</div>
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué tipo de producto te interesa? -</option>
@@ -191,70 +216,79 @@
     document.head.appendChild(style);
     document.body.appendChild(container);
 
-    // Verificar si ya hay número guardado
-const numeroGuardado = localStorage.getItem("numeroWhatsAppAsignado");
-if (numeroGuardado) {
-  numeroWhatsApp = numeroGuardado;
-} else {
+    // Siempre detectar estado automáticamente
+fetch("https://ipapi.co/json/")
+  .then(res => res.json())
+  .then(data => {
 
-  fetch("https://ipapi.co/json/")
-    .then(res => res.json())
-    .then(data => {
-      if (data.country === "MX") {
+    const grupoNorte = ["Coahuila", "Chihuahua", "Sinaloa"];
+    const grupoCentro = [
+      "Tamaulipas",
+      "San Luis Potosí",
+      "Querétaro",
+      "Nuevo León",
+      "Guanajuato"
+    ];
 
-        const estado = data.region;
+    const contenedor = document.getElementById("detector-region");
+    const texto = document.getElementById("texto-region");
+    const selectorManual = document.getElementById("selector-manual");
 
-        const grupoNorte = ["Coahuila", "Chihuahua", "Sinaloa"];
-        const grupoCentro = [
-          "Tamaulipas",
-          "San Luis Potosí",
-          "Querétaro",
-          "Nuevo León",
-          "Guanajuato"
-        ];
+    if (!contenedor || !texto) return;
 
-        let numeroDetectado = numeroWhatsApp;
+    let estadoDetectado = null;
+    let numeroDetectado = numeroWhatsApp;
 
-        if (grupoNorte.includes(estado)) {
-          numeroDetectado = "5213333333333";
-        } 
-        else if (grupoCentro.includes(estado)) {
-          numeroDetectado = "5212222222222";
-        }
+    if (data.country === "MX") {
+      estadoDetectado = data.region;
 
-        // Mostrar confirmación al usuario
-        const contenedor = document.getElementById("detector-region");
-        const texto = document.getElementById("texto-region");
-
-        if (contenedor && texto) {
-          texto.innerHTML = `Detectamos que estás en <strong>${estado}</strong>. ¿Es correcto?`;
-          contenedor.style.display = "block";
-
-          document.getElementById("confirmar-region").onclick = function () {
-            numeroWhatsApp = numeroDetectado;
-            localStorage.setItem("numeroWhatsAppAsignado", numeroWhatsApp);
-            contenedor.style.display = "none";
-          };
-
-          document.getElementById("cambiar-region").onclick = function () {
-            const elegir = confirm("¿Te encuentras en la región Norte?");
-            
-            if (elegir) {
-              numeroWhatsApp = "5213333333333";
-            } else {
-              numeroWhatsApp = "5212222222222";
-            }
-
-            localStorage.setItem("numeroWhatsAppAsignado", numeroWhatsApp);
-            contenedor.style.display = "none";
-          };
-        }
-
-        console.log("Estado detectado:", estado);
+      if (grupoNorte.includes(estadoDetectado)) {
+        numeroDetectado = "5213333333333";
+      } 
+      else if (grupoCentro.includes(estadoDetectado)) {
+        numeroDetectado = "5212222222222";
       }
-    })
-    .catch(err => console.warn("Geolocalización no disponible:", err));
-}
+    }
+
+    texto.innerHTML = estadoDetectado
+      ? `Detectamos que estás en <strong>${estadoDetectado}</strong>. ¿Es correcto?`
+      : `No pudimos detectar tu estado. ¿En cuál te encuentras?`;
+
+    contenedor.style.display = "block";
+
+    // Si acepta detección
+    document.getElementById("confirmar-region").onclick = function () {
+      numeroWhatsApp = numeroDetectado;
+      contenedor.style.display = "none";
+    };
+
+    // Si quiere cambiar
+    document.getElementById("cambiar-region").onclick = function () {
+      document.getElementById("acciones-region").style.display = "none";
+      selectorManual.style.display = "block";
+    };
+
+    // Confirmación manual
+    document.getElementById("confirmar-manual").onclick = function () {
+      const estadoManual = document.getElementById("estado-manual").value;
+
+      if (!estadoManual) {
+        alert("Por favor selecciona tu estado.");
+        return;
+      }
+
+      if (grupoNorte.includes(estadoManual)) {
+        numeroWhatsApp = "5213333333333";
+      } else if (grupoCentro.includes(estadoManual)) {
+        numeroWhatsApp = "5212222222222";
+      }
+
+      contenedor.style.display = "none";
+    };
+
+    console.log("Estado detectado:", estadoDetectado);
+  })
+  .catch(err => console.warn("Geolocalización no disponible:", err));
 
 
     // Funciones globales
