@@ -2,6 +2,7 @@
   const scripts = document.querySelectorAll('script[src*="whatsapp-widget"]');
   const script = scripts[scripts.length - 1];
   let numeroWhatsApp = script?.getAttribute('data-whatsapp') || '5218112486335';
+  let estadoConfirmadoFlag = false;
   const zapierURL = script?.getAttribute('data-zapier') || '';
 
   const style = document.createElement('style');
@@ -287,6 +288,9 @@
       if (selectEstado) {
         selectEstado.value = estado;
       }
+
+      estadoConfirmadoFlag = true;
+      verificarCampos();
     }
 
     function mostrarConfirmacion() {
@@ -301,6 +305,9 @@
       volverCambiar.style.display = "none";
       preguntaRegion.style.display = "none";
       selectorManual.style.display = "block";
+
+      estadoConfirmadoFlag = false;
+      verificarCampos();
     }
 
     // Confirmar detección automática
@@ -349,7 +356,7 @@
       const boton = document.getElementById('submit-whatsapp');
       const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       const telefonoValido = /^[0-9]{10}$/.test(telefono);
-      const todosValidos = nombre && emailValido && telefonoValido && servicio && mensaje;
+      const todosValidos = nombre && emailValido && telefonoValido && servicio && mensaje && estadoConfirmadoFlag;
       if (boton) boton.disabled = !todosValidos;
     };
 
