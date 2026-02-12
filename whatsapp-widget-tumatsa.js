@@ -279,7 +279,13 @@
       } else {
         numeroWhatsApp = "5212222222222";
       }
+    
       estadoActual.textContent = estado;
+    
+      const selectEstado = document.getElementById("estado-manual");
+      if (selectEstado) {
+        selectEstado.value = estado;
+      }
     }
 
     function mostrarConfirmacion() {
