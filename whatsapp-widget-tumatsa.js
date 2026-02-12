@@ -149,8 +149,9 @@
 
   <div id="detector-region" style="display:none; background:#f4f4f4; padding:10px; border-radius:6px; margin-bottom:10px; font-size:13px; font-family:'Poppins', sans-serif;">
 
-  <div id="estado-confirmado" style="display:none; margin-bottom:6px;">
+  <div id="estado-confirmado" style="display:none; margin-bottom:6px; line-height:18px;">
     Estás enviando tu mensaje desde: 
+    <br>
     <strong id="estado-actual"></strong>
   </div>
 
