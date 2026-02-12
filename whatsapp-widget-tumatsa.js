@@ -203,6 +203,7 @@ fetch("https://ipapi.co/json/")
       }
 
       console.log("Estado detectado:", estado);
+      alert(estado);
       console.log("Número asignado:", numeroWhatsApp);
     }
   })
