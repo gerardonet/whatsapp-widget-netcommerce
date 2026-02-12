@@ -155,43 +155,54 @@
   <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
 
   <div id="detector-region" style="display:none; background:#f4f4f4; padding:10px; border-radius:6px; margin-bottom:10px; font-size:13px; font-family:'Poppins', sans-serif;">
-  
-  <div id="texto-region"></div>
 
-  <div id="acciones-region" style="margin-top:8px; display:flex; gap:6px;">
-    <button type="button" id="confirmar-region" style="flex:1; background:#25D366; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;">
-      Sí
-    </button>
-    <button type="button" id="cambiar-region" style="flex:1; background:#ddd; border:none; padding:6px; border-radius:4px; cursor:pointer;">
-      Cambiar
-    </button>
+  <div id="estado-confirmado" style="display:none; margin-bottom:6px;">
+    Estás enviando tu mensaje desde: 
+    <strong id="estado-actual"></strong>
+  </div>
+
+  <div id="pregunta-region">
+    <div id="texto-region"></div>
+
+    <div id="acciones-region" style="margin-top:8px; display:flex; gap:6px;">
+      <button type="button" id="confirmar-region" style="flex:1; background:#25D366; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;">
+        Sí
+      </button>
+      <button type="button" id="cambiar-region" style="flex:1; background:#ddd; border:none; padding:6px; border-radius:4px; cursor:pointer;">
+        Cambiar
+      </button>
+    </div>
   </div>
 
   <div id="selector-manual" style="display:none; margin-top:8px;">
     <select id="estado-manual" style="width:100%; padding:6px; border-radius:4px;">
-  <option value="">Selecciona tu estado</option>
+      <option value="">Selecciona tu estado</option>
 
-  <optgroup label="Región 1">
-    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-    <option value="Chihuahua">Chihuahua</option>
-    <option value="Sinaloa">Sinaloa</option>
-  </optgroup>
+      <optgroup label="Región 1">
+        <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+        <option value="Chihuahua">Chihuahua</option>
+        <option value="Sinaloa">Sinaloa</option>
+      </optgroup>
 
-  <optgroup label="Región 2">
-    <option value="Aguascalientes">Aguascalientes</option>
-    <option value="Guanajuato">Guanajuato</option>
-    <option value="Nuevo León">Nuevo León</option>
-    <option value="Querétaro">Querétaro</option>
-    <option value="San Luis Potosí">San Luis Potosí</option>
-    <option value="Tamaulipas">Tamaulipas</option>
-    <option value="Otro">Otro</option>
-  </optgroup>
-</select>
+      <optgroup label="Región 2">
+        <option value="Aguascalientes">Aguascalientes</option>
+        <option value="Guanajuato">Guanajuato</option>
+        <option value="Nuevo León">Nuevo León</option>
+        <option value="Querétaro">Querétaro</option>
+        <option value="San Luis Potosí">San Luis Potosí</option>
+        <option value="Tamaulipas">Tamaulipas</option>
+        <option value="Otro">Otro</option>
+      </optgroup>
+    </select>
 
     <button type="button" id="confirmar-manual" style="margin-top:6px; width:100%; background:#25D366; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;">
       Confirmar estado
     </button>
   </div>
+
+  <button type="button" id="volver-cambiar" style="display:none; margin-top:8px; width:100%; background:#ddd; border:none; padding:6px; border-radius:4px; cursor:pointer;">
+    Cambiar estado
+  </button>
 
 </div>
 
@@ -224,13 +235,13 @@
   .then(res => res.json())
   .then(data => {
 
-    const grupoNorte = [
+    const grupo1 = [
       "Coahuila de Zaragoza",
       "Chihuahua",
       "Sinaloa"
     ];
 
-    const grupoCentro = [
+    const grupo2 = [
       "Aguascalientes",
       "Guanajuato",
       "Nuevo León",
@@ -241,47 +252,57 @@
 
     const contenedor = document.getElementById("detector-region");
     const texto = document.getElementById("texto-region");
+    const estadoActual = document.getElementById("estado-actual");
+
+    const estadoConfirmado = document.getElementById("estado-confirmado");
+    const preguntaRegion = document.getElementById("pregunta-region");
     const selectorManual = document.getElementById("selector-manual");
+    const volverCambiar = document.getElementById("volver-cambiar");
 
     if (!contenedor || !texto) return;
 
-    let estadoDetectado = null;
-    let numeroDetectado = numeroWhatsApp;
+    contenedor.style.display = "block";
 
-    if (data.country === "MX") {
-      estadoDetectado = data.region;
-
-      if (grupoNorte.includes(estadoDetectado)) {
-        numeroDetectado = "5213333333333";
-      } 
-      else if (grupoCentro.includes(estadoDetectado)) {
-        numeroDetectado = "5212222222222";
-      } 
-      else {
-        // Si detecta otro estado de México
-        numeroDetectado = "5212222222222";
-      }
-    }
+    let estadoDetectado = data.country === "MX" ? data.region : null;
 
     texto.innerHTML = estadoDetectado
       ? `Detectamos que estás en <strong>${estadoDetectado}</strong>. ¿Es correcto?`
       : `No pudimos detectar tu estado. ¿En cuál te encuentras?`;
 
-    contenedor.style.display = "block";
+    function asignarNumero(estado) {
+      if (grupo1.includes(estado)) {
+        numeroWhatsApp = "5213333333333";
+      } else {
+        numeroWhatsApp = "5212222222222";
+      }
+      estadoActual.textContent = estado;
+    }
 
-    // Confirmar detección
+    function mostrarConfirmacion() {
+      preguntaRegion.style.display = "none";
+      selectorManual.style.display = "none";
+      estadoConfirmado.style.display = "block";
+      volverCambiar.style.display = "block";
+    }
+
+    function volverASeleccion() {
+      estadoConfirmado.style.display = "none";
+      volverCambiar.style.display = "none";
+      preguntaRegion.style.display = "block";
+    }
+
+    // Confirmar detección automática
     document.getElementById("confirmar-region").onclick = function () {
-      numeroWhatsApp = numeroDetectado;
-      contenedor.style.display = "none";
+      asignarNumero(estadoDetectado || "Otro");
+      mostrarConfirmacion();
     };
 
-    // Cambiar manualmente
+    // Cambiar manual
     document.getElementById("cambiar-region").onclick = function () {
-      document.getElementById("acciones-region").style.display = "none";
+      preguntaRegion.style.display = "none";
       selectorManual.style.display = "block";
     };
 
-    // Confirmación manual
     document.getElementById("confirmar-manual").onclick = function () {
       const estadoManual = document.getElementById("estado-manual").value;
 
@@ -290,17 +311,14 @@
         return;
       }
 
-      if (grupoNorte.includes(estadoManual)) {
-        numeroWhatsApp = "5213333333333";
-      } else {
-        // Todo lo demás (incluye "Otro")
-        numeroWhatsApp = "5212222222222";
-      }
-
-      contenedor.style.display = "none";
+      asignarNumero(estadoManual);
+      mostrarConfirmacion();
     };
 
-    console.log("Estado detectado:", estadoDetectado);
+    volverCambiar.onclick = function () {
+      volverASeleccion();
+    };
+
   })
   .catch(err => console.warn("Geolocalización no disponible:", err));
 
