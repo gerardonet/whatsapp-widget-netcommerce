@@ -271,7 +271,7 @@
     let estadoDetectado = data.country === "MX" ? data.region : null;
 
     texto.innerHTML = estadoDetectado
-      ? `Detectamos que estás en <strong>${estadoDetectado}</strong>. ¿Es correcto?`
+      ? `Detectamos que estás en <strong>${estadoDetectado}</strong>. <br>¿Es correcto?`
       : `No pudimos detectar tu estado. ¿En cuál te encuentras?`;
 
     function asignarNumero(estado) {
