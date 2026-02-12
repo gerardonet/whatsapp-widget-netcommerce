@@ -147,13 +147,6 @@
     Compártenos tus datos para brindarte un mejor servicio.
   </h4>
 
-  <input type="text" id="nombre" placeholder="Tu nombre" oninput="verificarCampos()">
-  <input type="email" id="email" placeholder="Tu email" oninput="verificarCampos()" onblur="validarEmail()">
-  <div id="email-error" class="error-text">Por favor ingresa un correo válido.</div>
-
-  <input type="tel" id="telefono" placeholder="Tu teléfono" oninput="verificarCampos()" onblur="validarTelefono()">
-  <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
-
   <div id="detector-region" style="display:none; background:#f4f4f4; padding:10px; border-radius:6px; margin-bottom:10px; font-size:13px; font-family:'Poppins', sans-serif;">
 
   <div id="estado-confirmado" style="display:none; margin-bottom:6px;">
@@ -191,8 +184,10 @@
         <option value="Querétaro">Querétaro</option>
         <option value="San Luis Potosí">San Luis Potosí</option>
         <option value="Tamaulipas">Tamaulipas</option>
-        <option value="Otro">Otro</option>
       </optgroup>
+
+      <option value="Otro">Otro</option>
+
     </select>
 
     <button type="button" id="confirmar-manual" style="margin-top:6px; width:100%; background:#25D366; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;">
@@ -205,6 +200,15 @@
   </button>
 
 </div>
+
+  
+
+  <input type="text" id="nombre" placeholder="Tu nombre" oninput="verificarCampos()">
+  <input type="email" id="email" placeholder="Tu email" oninput="verificarCampos()" onblur="validarEmail()">
+  <div id="email-error" class="error-text">Por favor ingresa un correo válido.</div>
+
+  <input type="tel" id="telefono" placeholder="Tu teléfono" oninput="verificarCampos()" onblur="validarTelefono()">
+  <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué tipo de producto te interesa? -</option>
