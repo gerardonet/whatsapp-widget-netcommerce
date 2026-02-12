@@ -154,6 +154,18 @@
   <input type="tel" id="telefono" placeholder="Tu teléfono" oninput="verificarCampos()" onblur="validarTelefono()">
   <div id="telefono-error" class="error-text">El teléfono debe tener exactamente 10 dígitos.</div>
 
+  <div id="detector-region" style="display:none; background:#f4f4f4; padding:10px; border-radius:6px; margin-bottom:10px; font-size:13px; font-family:'Poppins', sans-serif;">
+  <div id="texto-region"></div>
+  <div style="margin-top:8px; display:flex; gap:6px;">
+    <button type="button" id="confirmar-region" style="flex:1; background:#25D366; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;">
+      Sí
+    </button>
+    <button type="button" id="cambiar-region" style="flex:1; background:#ddd; border:none; padding:6px; border-radius:4px; cursor:pointer;">
+      Cambiar
+    </button>
+  </div>
+  </div>
+
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué tipo de producto te interesa? -</option>
     <option>Productos para baño</option>
@@ -179,35 +191,70 @@
     document.head.appendChild(style);
     document.body.appendChild(container);
 
-    // Detectar estado automáticamente (México)
-fetch("https://ipapi.co/json/")
-  .then(res => res.json())
-  .then(data => {
-    if (data.country === "MX") {
-      const estado = data.region;
+    // Verificar si ya hay número guardado
+const numeroGuardado = localStorage.getItem("numeroWhatsAppAsignado");
+if (numeroGuardado) {
+  numeroWhatsApp = numeroGuardado;
+} else {
 
-      const grupoNorte = ["Coahuila", "Chihuahua", "Sinaloa"];
-      const grupoCentro = [
-        "Tamaulipas",
-        "San Luis Potosí",
-        "Querétaro",
-        "Nuevo León",
-        "Guanajuato"
-      ];
+  fetch("https://ipapi.co/json/")
+    .then(res => res.json())
+    .then(data => {
+      if (data.country === "MX") {
 
-      if (grupoNorte.includes(estado)) {
-        numeroWhatsApp = "5213333333333"; // 👉 Número grupo norte
-      } 
-      else if (grupoCentro.includes(estado)) {
-        numeroWhatsApp = "5212222222222"; // 👉 Número grupo centro
+        const estado = data.region;
+
+        const grupoNorte = ["Coahuila", "Chihuahua", "Sinaloa"];
+        const grupoCentro = [
+          "Tamaulipas",
+          "San Luis Potosí",
+          "Querétaro",
+          "Nuevo León",
+          "Guanajuato"
+        ];
+
+        let numeroDetectado = numeroWhatsApp;
+
+        if (grupoNorte.includes(estado)) {
+          numeroDetectado = "5213333333333";
+        } 
+        else if (grupoCentro.includes(estado)) {
+          numeroDetectado = "5212222222222";
+        }
+
+        // Mostrar confirmación al usuario
+        const contenedor = document.getElementById("detector-region");
+        const texto = document.getElementById("texto-region");
+
+        if (contenedor && texto) {
+          texto.innerHTML = `Detectamos que estás en <strong>${estado}</strong>. ¿Es correcto?`;
+          contenedor.style.display = "block";
+
+          document.getElementById("confirmar-region").onclick = function () {
+            numeroWhatsApp = numeroDetectado;
+            localStorage.setItem("numeroWhatsAppAsignado", numeroWhatsApp);
+            contenedor.style.display = "none";
+          };
+
+          document.getElementById("cambiar-region").onclick = function () {
+            const elegir = confirm("¿Te encuentras en la región Norte?");
+            
+            if (elegir) {
+              numeroWhatsApp = "5213333333333";
+            } else {
+              numeroWhatsApp = "5212222222222";
+            }
+
+            localStorage.setItem("numeroWhatsAppAsignado", numeroWhatsApp);
+            contenedor.style.display = "none";
+          };
+        }
+
+        console.log("Estado detectado:", estado);
       }
-
-      console.log("Estado detectado:", estado);
-      alert(estado);
-      console.log("Número asignado:", numeroWhatsApp);
-    }
-  })
-  .catch(err => console.warn("Geolocalización no disponible:", err));
+    })
+    .catch(err => console.warn("Geolocalización no disponible:", err));
+}
 
 
     // Funciones globales
