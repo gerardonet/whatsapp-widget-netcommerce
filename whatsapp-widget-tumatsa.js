@@ -156,7 +156,7 @@
   </div>
 
   <div id="pregunta-region">
-    <div id="texto-region"></div>
+    <div id="texto-region" style="line-height:18px;"></div>
 
     <div id="acciones-region" style="margin-top:8px; display:flex; gap:6px;">
       <button type="button" id="confirmar-region" style="flex:1; background:#25D366; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;">
