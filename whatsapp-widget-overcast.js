@@ -143,7 +143,7 @@
     </svg>
   </button>
 
-  <h4 style="margin-top:0; color:#000; font-size:15px; font-weight:400;text-transform: none;max-width: 85%;font-family: 'Poppins', sans-serif;">
+  <h4 style="margin-top:0; margin-bottom:10px; color:#000; font-size:15px; font-weight:400;text-transform: none;max-width: 85%;font-family: 'Poppins', sans-serif;">
     Compártenos tus datos para brindarte un mejor servicio.
   </h4>
 
