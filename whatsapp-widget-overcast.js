@@ -156,13 +156,21 @@
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué servicio te interesa? -</option>
-    <option>Inteligencia Artificial con Copilot</option>
-    <option>Ciberseguridad Empresarial con Microsoft</option>
-    <option>Ingeniería de Modern Workplace</option>
-    <option>Desarrollo de Software</option>
-    <option>Consultoría en Microsoft Azure</option>
-    <option>Adopción Tecnológica y Gestión del Cambio</option>
-    <option>Configuración de Productos Premium Microsoft</option>
+    <optgroup label="Microsoft">
+        <option>Inteligencia Artificial con Copilot</option>
+        <option>Ciberseguridad Empresarial con Microsoft</option>
+        <option>Ingeniería de Modern Workplace</option>
+        <option>Desarrollo de Software</option>
+        <option>Consultoría en Microsoft Azure</option>
+        <option>Adopción Tecnológica y Gestión del Cambio</option>
+        <option>Configuración de Productos Premium Microsoft</option>
+    </optgroup>
+    <optgroup label="LinkedIn">
+        <option>Búsqueda y Atracción de Talento</option>
+        <option>Desarrollo y Formación</option>
+        <option>Mapeo del Talento</option>
+        <option>Marca Empleadora</option>
+    </optgroup>
   </select>
   <div id="servicio-error" class="error-text">Por favor, selecciona una opción.</div>
 
@@ -244,7 +252,7 @@
         `Me llamo: *${nombre}*%0A` +
         `Mi correo es: *${email}*%0A` +
         `Mi teléfono: *${telefono}*%0A` +
-        `Actividad de interés: *${servicio}*%0A` +
+        `Servicio de interés: *${servicio}*%0A` +
         `Mensaje: *${mensaje}*`;
 
       const data = new URLSearchParams({
