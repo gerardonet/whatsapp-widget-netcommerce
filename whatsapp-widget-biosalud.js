@@ -3,7 +3,7 @@
   s.src = "https://whatsapp-widget-central.pages.dev/whatsapp-widget-cloudflare.js";
   s.defer = true;
 
-  s.setAttribute("data-site-id", "itb");
+  s.setAttribute("data-site-id", "netcommerce");
 
   s.setAttribute("data-config-endpoint", "https://whatsapp-widget-central.pages.dev/api/config");
   s.setAttribute("data-lead-endpoint", "https://whatsapp-widget-central.pages.dev/api/lead");
