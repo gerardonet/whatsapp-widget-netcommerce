@@ -40,7 +40,7 @@
   background: white;
   padding: 20px;
   border-radius: 10px;
-  max-width: 320px;
+  max-width: 400px;
   width: 90%;
   font-family: sans-serif;
   box-shadow: 0 5px 20px rgba(0,0,0,0.2);
