@@ -214,11 +214,14 @@
 
   <select id="servicio" onchange="verificarCampos()" onblur="validarServicio()">
     <option value="">- ¿Qué tipo de producto te interesa? -</option>
-    <option>Productos para baño</option>
-    <option>Recubrimientos y adhesivos</option>
-    <option>Calentadores, climas y calderas</option>
+    <option>Tubería y conexiones</option>
+    <option>Piso porcelanato</option>
+    <option>Válvulas</option>
+    <option>Sanitarios</option>
+    <option>Grifería y accesorios</option>
     <option>Plomería</option>
-    <option>Otro</option>
+    <option>Sistemas contra incendios</option>
+    <option>Acabados</option>
   </select>
   <div id="servicio-error" class="error-text">Por favor selecciona un servicio.</div>
 
@@ -428,7 +431,13 @@
 
       document.getElementById('form-container')?.classList.remove('show');
 
-      const numeroFinal = numeroWhatsApp || '5218112486335';
+      let numeroFinal = numeroWhatsApp || '5218112486335';
+
+      // Si el producto es Acabados, enviar a otro número
+      if (servicio === 'Acabados') {
+        numeroFinal = '5218119413434';
+      }
+      
       const url = `https://wa.me/${numeroFinal}?text=${mensajeWhatsApp}`;
       window.open(url, '_blank');
     };
